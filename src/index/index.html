@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover, user-scalable=no"
+    />
+    <link href="/image-tool/public/tailwind.css" rel="stylesheet" />
+    <script src="/image-tool/public/flexible.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        -webkit-tap-highlight-color: transparent;
+        border: none;
+      }
+      body {
+        padding: 20px 35px;
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        -webkit-overflow-scrolling: touch;
+        overflow: scroll;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+        background-color: #f2f3f5;
+      }
+      button {
+        width: 104px;
+        color: #ffffff;
+        font-size: 14px;
+        height: 32px;
+        min-height: 32px;
+        border-radius: 8px;
+        background: #4d76ff;
+      }
+      button:disabled {
+        background: #f7f8fa;
+        color: #8c8c8c;
+      }
+      .img-container {
+        height: 50%;
+      }
+      .container {
+        display: flex;
+        justify-content: space-between;
+        align-content: center; /* 修改这里 */
+        margin-right: -10px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+      }
+      .container > * {
+        margin-top: 10px;
+        margin-right: 10px;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      .label {
+        width: 104px;
+        color: #ffffff;
+        font-size: 14px;
+        height: 32px;
+        min-height: 32px;
+        border-radius: 8px;
+        background: #4d76ff;
+        line-height: 32px;
+        text-align: center;
+      }
+      .mask-container{
+        display: none;
+      }
+      .puzzle-container{
+        position: relative;
+      }
+      .puzzle-container-foot{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding-top: 10px;
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-bottom: constant(safe-area-inset-bottom);
+      }
+      .puzzle-container label{
+        position: absolute;
+        color: #ffffff;
+        background-color: #4d76ff;
+        width: 100px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+      }
+      .puzzle-container label input{
+        visibility: hidden;
+        position: absolute;
+      }
+      h2{
+        font-size: medium;
+        text-align: center;
+        font-weight: 500;
+      }
+    </style>
+    <title>图片AI工具</title>
+  </head>
+  <body>
+    <div class="img-container">
+      <img id="image" src="/image-tool/public/pic.jpg" alt="Picture" />
+    </div>
+
+    <div class="container">
+      <label class="label">
+        <input
+          type="file"
+          class="sr-only"
+          id="input"
+          name="image"
+          accept="image/*"
+        />
+        选择图片
+      </label>
+      <button id="crop" data-btn="crop">剪裁</button>
+      <button id="styleTransfer" data-btn="styleTransfer">国风风格</button>
+      <button data-btn="image-stylization">人物3D卡通化</button>
+      <button data-btn="texture">贴图</button>
+    </div>
+    <div class="mask-container">
+        <img id="mask" src="/image-tool/public/ear.png" />
+    </div>
+    <div id="result"></div>
+    <div class="puzzle-container">
+      <h2>拼贴/海报</h2>
+      <canvas id="puzzle" width="300" height="400">
+      </canvas>
+      <label id="puzzle-input-0">
+        <input
+          type="file"
+          name="image"
+          accept="image/*"
+        />
+        选择图片
+      </label>
+      <label id="puzzle-input-1">
+        <input
+          type="file"
+
+          name="image"
+          accept="image/*"
+        />
+        选择图片
+      </label>
+      <div class="puzzle-container-foot">
+        <button id="savePuzzle">预览</button>
+      </div>
+    </div>
+  </body>
+</html>
